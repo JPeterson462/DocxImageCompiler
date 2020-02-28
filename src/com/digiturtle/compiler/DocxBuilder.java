@@ -14,26 +14,28 @@ import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTPageMargins;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
 
 public class DocxBuilder {
-	
+
 	private XWPFDocument document;
-	
+
 	private XWPFParagraph p;
-	
+
 	private XWPFRun r;
-	
+
 	private String filename;
-	
+
 	private FileOutputStream stream;
-	
+
 	public DocxBuilder(String filename) {
 		document = new XWPFDocument();
 		p = document.createParagraph();
 		r = p.createRun();
 		this.filename = filename;
 	}
-	
+
 	public void addImageToWordDocument(File imageFile) throws IOException, InvalidFormatException {
 		BufferedImage bimg1 = ImageIO.read(imageFile);
 		int width = bimg1.getWidth();
@@ -42,9 +44,9 @@ public class DocxBuilder {
 		String imgFile = imageFile.getName(); 
 		int imgFormat = getImageFormat(imgFile);
 		double imgRatio = (double) height / (double) width;
-		int imageDocWidth = 540; // 7.5 inches * 72 points = 540
+		int imageDocWidth = 468; // 7.5 inches * 72 points = 540, 6.5 inches * 72 points = 468
 		int imageDocHeight = (int) ((double) imageDocWidth * imgRatio);
-		
+
 		r.addPicture(new FileInputStream(imageFile), imgFormat, imgFile, Units.toEMU(imageDocWidth), Units.toEMU(imageDocHeight));
 	}
 
@@ -77,7 +79,7 @@ public class DocxBuilder {
 		}
 		return format;
 	}
-	
+
 	public void close() throws IOException {
 		stream = new FileOutputStream(filename);
 		document.write(stream);
