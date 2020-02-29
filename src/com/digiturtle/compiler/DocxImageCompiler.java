@@ -1,12 +1,10 @@
 package com.digiturtle.compiler;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 
 public class DocxImageCompiler {
