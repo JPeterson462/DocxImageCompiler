@@ -24,7 +24,7 @@ public class DocxImageCompiler {
 			String prefix = JOptionPane.showInputDialog("Image Filter");
 			File[] possibleImages = selectedFile.listFiles();
 			
-			DocxBuilder builder = new DocxBuilder("test1.docx");
+			DocxBuilder builder = new DocxBuilder(prefix + ".docx");
 			ArrayList<File> files = new ArrayList<>();
 			for (File possibleImage : possibleImages) {
 				if (!possibleImage.getName().contains("ignore") && possibleImage.getName().startsWith(prefix)) {
